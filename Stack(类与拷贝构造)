@@ -1,1 +1,66 @@
-
+#include<iostream>
+using namespace std;
+class CStack {
+private:
+	int *a;
+	int size;
+	int top;
+public:
+	CStack() {
+		a = new int[10];
+		size = 10;
+		top = 0;
+		cout << "Constructor." << endl;
+	}  //定义一个空函数
+	CStack(int s) {
+		a = new int[s];
+		size = s;
+		top = 0;
+		cout << "Constructor." << endl;
+	}  //建立一个10元素的栈
+	
+	int get(int index) {
+		return a[index];
+	}
+	void push(int n) {
+		a[top] = n;
+		top++;
+	}  //返回下标未index的栈元素
+	int isEmpty() {
+		if (top == 0) { return 1; }  //判断堆栈空的条件是top是否等于
+		else { return 0; }
+	}
+	int isFull() {
+		if (top == size) { return 1; }
+		else { return 0; }
+	}
+	int pop() {
+		top--;
+		return a[top];
+		
+	}  //出栈，返回栈顶元素
+	~CStack() {
+		delete []a;
+		cout << "Destructor." << endl;
+	}
+//析构函数，释放在构造时申请的空间
+};
+int main() {
+	int t,sizel,n;
+	cin >> t ;
+	for (int i = 0; i < t; i++) {
+		cin >> sizel;
+		CStack CStack1(sizel);
+		for (int j = 0; j < sizel; j++) {
+			cin >> n;
+			CStack1.push(n);
+		}
+		if (CStack1.isEmpty() == 1) { cout << "empty" << endl; }
+		else if (CStack1.isFull() == 1) {
+			for (int i = 0; i < sizel; i++) {
+				cout << CStack1.pop() << " ";
+			}
+			cout << endl;
+		}
+	}
+}
